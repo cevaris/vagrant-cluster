@@ -1,1 +1,12 @@
-
+node1:
+	count: 2
+	memory: 1024
+	ipbase: "192.168.101."
+node2:
+	count: 1
+	memory: 2048
+	ipbase: "192.168.102."
+node3:
+	count: 1
+	memory: 1024
+  ipbase: "192.168.103."
