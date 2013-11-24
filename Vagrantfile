@@ -3,22 +3,17 @@
 
 require './scripts/load_config'
 
-BASE_DIR = File.expand_path(File.dirname(__FILE__))
-CONFIG   = load_config(YAML.load(File.read(File.join(base_dir, "#{BASE_DIR}/config/config.yml"))))
+# BASE_DIR = File.expand_path(File.dirname(__FILE__))
+# CONFIG   = load_config(YAML.load(File.read("#{BASE_DIR}/config/config.yml")))
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "Official Ubuntu 12.04 daily Cloud Image amd64 (VirtualBox 4.1.12)"
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
+  # The url from where the 'config.vm.box' box will be fetched if it doesn't already exist on the user's system.
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
 
 
@@ -26,15 +21,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.berkshelf.enabled = true
   config.omnibus.chef_version = :latest
 
-  cfg.vm.provision :shell do |s|
-    s.path = "scripts/populate_sshkey.sh"
-    s.args = "/root root"
+
+  ["/root root", "/home/vagrant vagrant" ].each do args
+      config.vm.provision :shell do |s|
+      s.path = "scripts/populate_sshkey.sh"
+      s.args = args
+    end
   end
 
-  cfg.vm.provision :shell do |s|
-    s.path = "scripts/populate_sshkey.sh"
-    s.args = "/home/vagrant vagrant"
-  end
+  # config.vm.provision :shell do |s|
+  #   s.path = "scripts/populate_sshkey.sh"
+  #   s.args = "/root root"
+  # end
+
+  # config.vm.provision :shell do |s|
+  #   s.path = "scripts/populate_sshkey.sh"
+  #   s.args = "/home/vagrant vagrant"
+  # end
 
 
   # Create a forwarded port mapping which allows access to a specific port
