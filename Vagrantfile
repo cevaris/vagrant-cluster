@@ -22,8 +22,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
 
-  ["/root root", "/home/vagrant vagrant" ].each do args
-      config.vm.provision :shell do |s|
+  config.ssh.private_key_path = "scripts/populate_sshkey.sh"
+  ["/root root", "/home/vagrant vagrant" ].each do |args|
+    config.vm.provision :shell do |s|
       s.path = "scripts/populate_sshkey.sh"
       s.args = args
     end
