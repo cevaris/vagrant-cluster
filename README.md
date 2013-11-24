@@ -7,7 +7,7 @@ Template for setting up cluster via Vagrant
 Prerequisites
 ----
 * VirtualBox: <https://www.virtualbox.org/>
-* vagrant 1.2+: <http://www.vagrantup.com/>
+* vagrant 1.3.5+: <http://www.vagrantup.com/>
 * vagrant plugins
     * [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus)
           `$ vagrant plugin install vagrant-omnibus`
